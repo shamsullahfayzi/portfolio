@@ -1,4 +1,4 @@
-# shamsullahfayzi.dev — portfolio
+# Portfolio — Shamsullah Fayzi
 
 **My portfolio, in English and Dari.** One button switches the whole site between left-to-right English and right-to-left Dari, the same way the hospital software I build does.
 
