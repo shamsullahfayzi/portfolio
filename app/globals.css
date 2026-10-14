@@ -1,0 +1,593 @@
+/* ─────────────────────────────────────────────────────────────
+   Tokens. Lapis lazuli and Herat saffron on cool paper.
+   Every spacing rule uses logical properties (inline-start/end),
+   so the whole page mirrors correctly when dir="rtl".
+   ───────────────────────────────────────────────────────────── */
+:root {
+  --paper: #f2f4f8;
+  --paper-2: #e7ebf3;
+  --ink: #121a33;
+  --ink-2: #4a5577;
+  --ink-3: #5f6989; /* quiet text that still passes 4.5:1 */
+  --lapis: #22389a;
+  --lapis-soft: #dfe5f6;
+  --saffron: #e3a13b;
+  --rule: #cdd4e4;
+  --on-lapis: #f2f4f8;
+
+  --font: "IBM Plex Sans", "IBM Plex Sans Arabic", system-ui, sans-serif;
+  --font-fa: "IBM Plex Sans Arabic", "IBM Plex Sans", system-ui, sans-serif;
+
+  /* Type scale (classic 16 / 18 / 21 / 28 / 36 / 48 / 72) */
+  --t-sm: 0.875rem;
+  --t-base: 1.0625rem;
+  --t-md: 1.3125rem;
+  --t-lg: 1.75rem;
+  --t-xl: 2.25rem;
+  --t-hero: clamp(2.25rem, 1.2rem + 3.6vw, 4.25rem);
+
+  --gutter: clamp(1rem, 4vw, 3rem);
+  --measure: 68ch;
+  --max: 76rem;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #0d1430;
+    --paper-2: #141d40;
+    --ink: #e8ecf6;
+    --ink-2: #a8b3d3;
+    --ink-3: #8a96bb;
+    --lapis: #9db1f2;
+    --lapis-soft: #1b2756;
+    --rule: #26315c;
+    --on-lapis: #0d1430;
+    color-scheme: dark;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: var(--t-base);
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+}
+
+:lang(fa) {
+  font-family: var(--font-fa);
+  line-height: 1.85; /* Arabic script needs more room than Latin */
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+p,
+li {
+  text-wrap: pretty;
+}
+
+h1,
+h2,
+h3,
+p,
+ol,
+ul,
+dl,
+dd {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--saffron);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.skip {
+  position: absolute;
+  inset-inline-start: 1rem;
+  top: -4rem;
+  padding: 0.5rem 1rem;
+  background: var(--lapis);
+  color: var(--on-lapis);
+  z-index: 10;
+}
+.skip:focus {
+  top: 1rem;
+}
+
+/* ── Top bar ─────────────────────────────────────────────── */
+.bar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  max-width: var(--max);
+  margin-inline: auto;
+  padding: 0.9rem var(--gutter);
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(8px);
+}
+.mark {
+  font-weight: 700;
+  font-size: var(--t-md);
+  text-decoration: none;
+  color: var(--lapis);
+  font-family: var(--font);
+}
+.bar nav {
+  display: flex;
+  gap: 1.25rem;
+  margin-inline-start: auto;
+}
+.bar nav a {
+  text-decoration: none;
+  color: var(--ink-2);
+  font-size: var(--t-sm);
+  font-weight: 500;
+  padding-block: 0.4rem;
+}
+.bar nav a:hover {
+  color: var(--ink);
+}
+.toggle {
+  font: inherit;
+  font-weight: 600;
+  font-size: var(--t-base);
+  min-width: 5.5rem;
+  padding: 0.45rem 1rem;
+  border: 2px solid var(--saffron);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+.toggle [lang="fa-AF"] {
+  font-family: var(--font-fa);
+}
+.toggle:hover {
+  background: var(--saffron);
+  color: #121a33;
+}
+
+/* ── Sections share one column system ────────────────────── */
+main > section {
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+h2 {
+  font-size: var(--t-xl);
+  line-height: 1.2;
+  font-weight: 600;
+  margin-block-end: 1.5rem;
+}
+h2:lang(en),
+h1:lang(en) {
+  letter-spacing: -0.015em;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.7rem 1.3rem;
+  border: 2px solid var(--lapis);
+  border-radius: 6px;
+  color: var(--lapis);
+  font-weight: 600;
+  text-decoration: none;
+}
+.btn:hover {
+  background: var(--lapis-soft);
+}
+.btn.primary {
+  background: var(--lapis);
+  color: var(--on-lapis);
+}
+.btn.primary:hover {
+  background: color-mix(in srgb, var(--lapis) 85%, var(--ink));
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+/* ── Hero: leading language large, the other one as an echo ─ */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: end;
+  padding-block: clamp(3rem, 9vw, 8rem) clamp(3rem, 7vw, 6rem);
+}
+.hero h1 {
+  font-size: var(--t-hero);
+  line-height: 1.08;
+  font-weight: 600;
+  max-width: 18ch;
+  margin-block-end: 1.75rem;
+}
+.hero h1:lang(fa) {
+  line-height: 1.45;
+  max-width: 22ch;
+}
+.intro {
+  font-size: var(--t-md);
+  color: var(--ink-2);
+  max-width: 52ch;
+  margin-block-end: 2rem;
+}
+.hero-echo {
+  font-size: var(--t-lg);
+  line-height: 1.5;
+  color: var(--ink-3);
+  border-inline-start: 3px solid var(--saffron);
+  padding-inline-start: 1.25rem;
+  font-weight: 400;
+}
+.hero-echo:lang(fa) {
+  font-family: var(--font-fa);
+  line-height: 1.9;
+  text-align: start;
+}
+
+/* ── REDMARS feature ────────────────────────────────────── */
+.feature {
+  padding-block: clamp(3rem, 7vw, 6rem);
+  border-block-start: 1px solid var(--rule);
+}
+.feature-head {
+  max-width: var(--measure);
+  margin-block-end: 3rem;
+}
+.feature-head h2 {
+  font-size: clamp(2rem, 1.4rem + 2.2vw, 3rem);
+  color: var(--lapis);
+  margin-block-end: 1rem;
+}
+.lede {
+  font-size: var(--t-md);
+}
+
+.flow-title,
+.feature-body h3,
+.tools-title {
+  font-size: var(--t-base);
+  font-weight: 600;
+  color: var(--ink-2);
+  margin-block-end: 1.25rem;
+}
+
+/* The flow is a real sequence, so it's an ordered list with numbers. */
+.flow {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  counter-reset: step;
+  margin-block-end: 3.5rem;
+}
+.flow li {
+  counter-increment: step;
+  position: relative;
+  padding-block-start: 2.6rem;
+  padding-inline-end: 1rem;
+  border-block-start: 2px solid var(--lapis);
+}
+.flow li::before {
+  content: counter(step);
+  position: absolute;
+  top: -1rem;
+  inset-inline-start: 0;
+  width: 2rem;
+  height: 2rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 2px solid var(--lapis);
+  color: var(--lapis);
+  font-weight: 700;
+  font-size: var(--t-sm);
+}
+:lang(fa) .flow li::before {
+  content: counter(step, persian); /* ۱ ۲ ۳ in Dari */
+}
+.flow li:first-child::before {
+  background: var(--saffron);
+  border-color: var(--saffron);
+  color: #121a33;
+}
+.flow-step {
+  display: block;
+  font-weight: 600;
+  margin-block-end: 0.35rem;
+}
+.flow-detail {
+  display: block;
+  font-size: var(--t-sm);
+  color: var(--ink-2);
+  line-height: 1.5;
+}
+:lang(fa) .flow-detail {
+  line-height: 1.8;
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.5rem;
+  padding-block: 2rem;
+  margin-block-end: 3rem;
+  border-block: 1px solid var(--rule);
+}
+.facts div {
+  display: flex;
+  flex-direction: column-reverse; /* number above its label, label read first by screen readers */
+}
+.facts dd {
+  font-size: clamp(1.9rem, 1.4rem + 1.6vw, 2.75rem);
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--lapis);
+}
+.facts dt {
+  color: var(--ink-2);
+  font-size: var(--t-sm);
+  margin-block-start: 0.35rem;
+}
+
+.feature-body {
+  max-width: var(--measure);
+}
+.details {
+  padding-inline-start: 1.2rem;
+  margin-block-end: 1.75rem;
+}
+.details li {
+  margin-block-end: 0.8rem;
+}
+.details li::marker {
+  color: var(--saffron);
+}
+.status {
+  font-weight: 500;
+  margin-block-end: 1.5rem;
+  padding-inline-start: 0.9rem;
+  border-inline-start: 3px solid var(--lapis);
+}
+
+/* ── More projects: rows, not cards ─────────────────────── */
+.more {
+  padding-block: clamp(3rem, 7vw, 6rem);
+  border-block-start: 1px solid var(--rule);
+}
+.projects {
+  list-style: none;
+  padding: 0;
+}
+.project {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 6fr) minmax(0, 3fr) auto;
+  gap: 1.5rem;
+  align-items: baseline;
+  padding-block: 1.4rem;
+  border-block-end: 1px solid var(--rule);
+}
+.project h3 {
+  font-size: var(--t-md);
+  font-weight: 600;
+}
+.project .what {
+  color: var(--ink);
+}
+.project .stack {
+  font-size: var(--t-sm);
+  color: var(--ink-2);
+  text-align: start;
+  font-family: var(--font);
+}
+[dir="rtl"] .project .stack {
+  text-align: end; /* the LTR stack line still hugs the RTL reading edge */
+}
+.project .links {
+  display: flex;
+  gap: 1rem;
+  font-weight: 600;
+  color: var(--lapis);
+}
+.project .links a {
+  text-underline-offset: 4px;
+}
+
+/* ── Experience: a real sequence, newest first ──────────── */
+.experience {
+  padding-block: clamp(3rem, 7vw, 6rem);
+  border-block-start: 1px solid var(--rule);
+}
+.timeline {
+  list-style: none;
+  padding: 0;
+  margin-block-end: 3rem;
+  border-inline-start: 2px solid var(--rule);
+}
+.timeline li {
+  position: relative;
+  padding-inline-start: 1.75rem;
+  padding-block-end: 2rem;
+  max-width: var(--measure);
+}
+.timeline li::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: -7px;
+  top: 0.55rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--lapis);
+}
+.timeline li:first-child::before {
+  background: var(--saffron);
+}
+.timeline h3 {
+  font-size: var(--t-md);
+  font-weight: 600;
+}
+.role {
+  font-weight: 500;
+}
+.place {
+  color: var(--ink-2);
+  font-weight: 400;
+  margin-inline-start: 0.75rem;
+}
+.note {
+  color: var(--ink-2);
+  margin-block-start: 0.25rem;
+}
+.tools {
+  max-width: var(--measure);
+  color: var(--ink);
+  font-family: var(--font);
+}
+[dir="rtl"] .tools {
+  text-align: end;
+}
+
+/* ── Contact ────────────────────────────────────────────── */
+.contact {
+  padding-block: clamp(3rem, 8vw, 7rem);
+  border-block-start: 1px solid var(--rule);
+}
+.contact h2 {
+  font-size: clamp(2rem, 1.4rem + 2.4vw, 3.25rem);
+  color: var(--lapis);
+  max-width: 20ch;
+}
+.contact p {
+  font-size: var(--t-md);
+  color: var(--ink-2);
+  max-width: 50ch;
+  margin-block-end: 2rem;
+}
+
+.foot {
+  max-width: var(--max);
+  margin-inline: auto;
+  padding: 2rem var(--gutter) 3rem;
+  color: var(--ink-2);
+  font-size: var(--t-sm);
+  border-block-start: 1px solid var(--rule);
+}
+
+/* ── The one animated moment: the language flip ─────────── */
+@keyframes out-to-start {
+  to { opacity: 0; transform: translateX(-32px); }
+}
+@keyframes out-to-end {
+  to { opacity: 0; transform: translateX(32px); }
+}
+@keyframes in-from-end {
+  from { opacity: 0; transform: translateX(32px); }
+}
+@keyframes in-from-start {
+  from { opacity: 0; transform: translateX(-32px); }
+}
+/* Switching to Dari: text now anchors right, so it arrives from the right. */
+html[data-flip="fa"]::view-transition-old(root) { animation: out-to-start 220ms ease-in both; }
+html[data-flip="fa"]::view-transition-new(root) { animation: in-from-end 320ms ease-out both; }
+html[data-flip="en"]::view-transition-old(root) { animation: out-to-end 220ms ease-in both; }
+html[data-flip="en"]::view-transition-new(root) { animation: in-from-start 320ms ease-out both; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+/* ── Smaller screens ────────────────────────────────────── */
+@media (max-width: 960px) {
+  .flow {
+    grid-template-columns: minmax(0, 1fr);
+    border-inline-start: 2px solid var(--lapis);
+    margin-inline-start: 1rem;
+  }
+  .flow li {
+    border-block-start: 0;
+    padding-block: 0 1.5rem;
+    padding-inline-start: 2rem;
+  }
+  .flow li::before {
+    top: 0;
+    inset-inline-start: -1.07rem;
+  }
+  .flow li:last-child {
+    padding-block-end: 0;
+  }
+  .facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .project {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.4rem;
+  }
+}
+
+@media (max-width: 720px) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .hero-echo {
+    font-size: var(--t-md);
+  }
+  .bar {
+    gap: 0.75rem;
+  }
+  .bar nav {
+    gap: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .bar nav {
+    display: none; /* the page is one scroll; the toggle matters more than anchors here */
+  }
+  .toggle {
+    margin-inline-start: auto;
+  }
+  .facts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
