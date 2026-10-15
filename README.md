@@ -1,19 +1,24 @@
 # Portfolio — Shamsullah Fayzi
 
-**My portfolio, in English and Dari.** One button switches the whole site between left-to-right English and right-to-left Dari, the same way the hospital software I build does.
+A type-led, animation-rich developer portfolio. Warm paper, hard ink, one vermillion accent; the headline is the interface.
 
 ![Next.js](https://img.shields.io/badge/Next.js_15-000000?logo=nextdotjs&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
-![Lighthouse](https://img.shields.io/badge/Lighthouse-100_a11y_·_100_SEO-22389a)
 
-## How it works
+## What's in it
 
-- **Bilingual by design.** All copy lives in [`content/content.ts`](content/content.ts) in both languages. The toggle sets `<html lang dir>`, and every layout rule uses CSS logical properties (`margin-inline-start`, `border-inline-start`, …), so the page mirrors without a second stylesheet.
-- **No flash of the wrong language.** A tiny inline script restores the saved language before first paint.
-- **One animated moment.** The language flip uses the View Transitions API, and is skipped for people who prefer reduced motion.
-- **One type family for both scripts.** IBM Plex Sans and IBM Plex Sans Arabic, self-hosted.
-- **Static export.** `next build` produces plain files in `out/` that any host can serve.
-- **Accessible:** skip link, visible keyboard focus, AA contrast in light and dark mode, Persian numerals in Dari.
+- **Hero:** your portrait rebuilt from ~32,000 particles (React Three Fiber shader). The cursor pushes and swirls them out of the picture like liquid and they flow back; scrolling away dissolves it. Idea from 21st.dev's Liquid Sculpture Hero. Plus a masked-letter entrance (pure CSS), magnetic letters, and a marquee. The still photo is the base layer for phones, reduced motion and no-WebGL.
+- **Work:** a plain scrolling list by default, with a "View in 3D room" button (desktop with a mouse) that switches to a pinned 3D room: scroll to walk a corridor from an entrance door, past one frame per project, out an exit door (CSS 3D, real DOM so every demo stays interactive; dots jump to a project; "List view" switches to a plain list). Phones, touch and reduced motion get the plain list. Seven projects, each with its own palette and a playable or interactive demo using clearly fake data: REDMARS visit flow, a live React Three Fiber solar-taxi twin, attendance scan, Al-Raheel before/after, Trendora roles, Zombie Typing, Job Center.
+- **Range:** skills as a map. Pick a skill to see which projects used it and which skills travelled with it.
+- **Path:** a timeline whose rail draws as you scroll.
+- **Contact:** rotating headline, copy-email button, live Dubai time.
+
+## Quality choices
+
+- Animates `transform`/`opacity` only. Every demo is its own lazy chunk; three.js loads only when the Solar demo nears the viewport.
+- Phones: no cursor effects, lower-resolution 3D with a gentle sway instead of drag controls.
+- `prefers-reduced-motion`: nothing moves, everything stays visible and usable (marquee becomes a static list, the zombie waits).
+- Static export (`out/`), deployable to Vercel as-is.
 
 ## Run it
 
@@ -25,8 +30,12 @@ npm run build    # static site in out/
 
 ## Edit the content
 
-Everything a visitor reads is in `content/content.ts`. Fill in `LINKS` (email, LinkedIn, CV) and the empty links appear automatically.
+All copy is in [`content/content.ts`](content/content.ts), sourced from the CV. `public/cv.pdf` and `public/me.jpg` back the CV button and hero portrait; empty either in `LINKS` and the button hides / a marked placeholder shows.
+
+## Design system
+
+Persisted from UI/UX Pro Max in `design-system/fayzi-portfolio/MASTER.md`; the real tokens live in `app/globals.css`.
 
 ## Deploy
 
-Push to GitHub and import the repo on [Vercel](https://vercel.com/new) (zero config), or drag the `out/` folder onto Netlify.
+Push to GitHub and import the repo on [Vercel](https://vercel.com/new) (zero config), or drag `out/` onto Netlify.

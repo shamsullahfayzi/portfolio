@@ -1,280 +1,388 @@
-// All site copy, in English and Dari. Edit text here; components never hard-code words.
-// Values marked TODO are details only Shamsullah can supply.
-
-export type Lang = "en" | "fa";
+// All site copy. Edit text here; components never hard-code words.
+// Facts come from Shamsullah's CV (Shamsullah_Fayzi_CV.pdf) and project notes.
 
 export const LINKS = {
   github: "https://github.com/shamsullahfayzi",
-  linkedin: "", // TODO: LinkedIn URL (link hides itself while empty)
-  email: "", // TODO: contact email (button hides itself while empty)
-  cv: "", // TODO: put cv.pdf in /public and set this to "/cv.pdf"
+  linkedin: "https://www.linkedin.com/in/shamsullah-fayzi-b41884380/",
+  email: "shams.fayzi@gmail.com",
+  cv: "/cv.pdf", // public/cv.pdf (the button hides itself if this is emptied)
+  photo: "/me.jpg", // public/me.jpg (a marked placeholder shows if this is emptied)
+};
+
+export type ProjectId =
+  | "redmars"
+  | "solar"
+  | "attendance"
+  | "alraheel"
+  | "trendora"
+  | "zombie"
+  | "jobcenter"
+  | "prescription"
+  | "zoya"
+  | "musicmingle";
+
+// Missing entry = no public code (the project's `note` says why).
+export const PROJECT_LINKS: Partial<Record<ProjectId, string>> = {
   redmars: "https://github.com/shamsullahfayzi/REDMARS",
+  solar: "https://github.com/shamsullahfayzi/solar-taxi-label",
+  zombie: "https://github.com/shamsullahfayzi/zombie-typing",
+  jobcenter: "https://github.com/shamsullahfayzi/job-center",
+  zoya: "https://github.com/shamsullahfayzi/Zoya",
+  musicmingle: "https://github.com/shamsullahfayzi/MusicMingle",
 };
 
-type Project = {
+export type SkillUse = { project?: ProjectId; note?: string };
+
+// Where each skill shows up. A skill missing here simply has no project card yet (the UI says so).
+export const SKILL_USE: Record<string, SkillUse[]> = {
+  React: [{ project: "redmars" }, { project: "trendora" }, { project: "zombie" }, { project: "jobcenter" }, { note: "This portfolio" }],
+  "Next.js": [{ project: "trendora" }, { note: "This portfolio" }],
+  Angular: [{ project: "zoya" }],
+  Blazor: [{ project: "alraheel" }],
+  Tailwind: [{ project: "zombie" }, { project: "jobcenter" }],
+  MUI: [{ project: "trendora" }],
+  Redux: [{ project: "trendora" }],
+  "TanStack Query": [{ project: "redmars" }],
+  NestJS: [{ project: "redmars" }],
+  FastAPI: [{ project: "trendora" }],
+  "ASP.NET Core": [{ project: "alraheel" }, { project: "musicmingle" }],
+  "REST APIs": [{ project: "redmars" }],
+  "JWT auth": [{ project: "trendora" }, { project: "zoya" }],
+  "Role-based access control": [{ project: "redmars" }, { project: "trendora" }, { project: "alraheel" }],
+  PostgreSQL: [{ project: "redmars" }, { project: "alraheel" }],
+  "SQL Server": [{ project: "trendora" }],
+  Prisma: [{ project: "redmars" }],
+  Python: [{ project: "trendora" }, { project: "attendance" }],
+  "C#": [{ project: "alraheel" }, { project: "musicmingle" }],
+  Java: [{ project: "prescription" }],
+  JavaFX: [{ project: "prescription" }],
+  "Three.js": [{ project: "solar" }, { note: "This portfolio" }],
+  "React Three Fiber": [{ project: "solar" }, { note: "This portfolio" }],
+  "Web Bluetooth": [{ project: "solar" }],
+  "Face recognition": [{ project: "attendance" }],
+  "Azure AI Document Intelligence": [{ project: "alraheel" }],
+  "OCR (Tesseract)": [{ project: "alraheel" }],
+  Docker: [{ project: "redmars" }],
+  Caddy: [{ project: "redmars" }],
+};
+
+// Project ids that get a full-size feature treatment, in display order.
+export const FEATURED: ProjectId[] = ["redmars", "solar", "attendance", "alraheel", "trendora", "zombie", "jobcenter"];
+// Compact strip at the end.
+export const MINOR: ProjectId[] = ["prescription", "zoya", "musicmingle"];
+
+type Stat = { value: string; label: string };
+
+export type Project = {
   name: string;
-  what: string;
-  stack: string;
-  code: string;
-  live?: string;
+  kind: string; // short label above the title, as the CV words it
+  pitch: string;
+  stats: Stat[];
+  stack: string[];
+  points: string[];
+  note?: string; // e.g. "Client work, no public code"
 };
 
-type Job = { org: string; role: string; place: string; note: string };
+export type SkillGroup = { id: string; name: string; blurb: string; items: string[] };
+
+export type Job = { org: string; role: string; place: string; dates: string; points: string[] };
 
 type Copy = {
-  langName: string; // name of THIS language, shown on the toggle when you're in the other one
-  switchLabel: string; // accessible label for the toggle
-  nav: { work: string; experience: string; contact: string };
-  hero: { title: string; intro: string; seeWork: string; cv: string; github: string };
-  redmars: {
+  meta: { title: string; description: string };
+  nav: { work: string; skills: string; experience: string; contact: string };
+  hero: {
+    kicker: string;
     name: string;
-    lede: string;
-    flowTitle: string;
-    flow: { step: string; detail: string }[];
-    facts: { value: string; label: string }[];
-    detailsTitle: string;
-    details: string[];
-    status: string;
-    code: string;
+    line: string;
+    seeWork: string;
+    cv: string;
+    scroll: string;
+    ticker: string[];
   };
-  more: { title: string; code: string; live: string; projects: Project[] };
-  experience: { title: string; jobs: Job[]; toolsTitle: string; tools: string };
-  contact: { title: string; body: string; email: string; linkedin: string; github: string };
+  work: {
+    title: string;
+    intro: string;
+    code: string;
+    noCode: string;
+    stack: string;
+    more: string;
+    enter3d: string;
+    projects: Record<ProjectId, Project>;
+  };
+  skills: { title: string; intro: string; hint: string; usedIn: string; none: string; together: string; groups: SkillGroup[] };
+  experience: { title: string; present: string; jobs: Job[] };
+  contact: {
+    title: string;
+    words: string[];
+    body: string;
+    email: string;
+    linkedin: string;
+    github: string;
+    copy: string;
+    copied: string;
+    time: string;
+  };
   footer: string;
+  placeholder: { photo: string; screenshot: string };
 };
 
-export const COPY: Record<Lang, Copy> = {
-  en: {
-    langName: "English",
-    switchLabel: "Switch the site to Dari",
-    nav: { work: "Work", experience: "Experience", contact: "Contact" },
-    hero: {
-      title:
-        "I build hospital software that works in two languages and keeps working when the internet doesn't.",
-      intro:
-        "I'm Shamsullah Fayzi, a full-stack engineer in Dubai. I design systems end to end, from the database to the screen a receptionist uses all day, and ship them to real clinics in Afghanistan.",
-      seeWork: "See my work",
-      cv: "Download CV",
-      github: "GitHub",
-    },
-    redmars: {
-      name: "REDMARS hospital system",
-      lede:
-        "An outpatient system for a psychiatric hospital in Kabul. It carries a patient's whole visit, from the front desk to the pharmacy, on one server inside the building, in Dari and English.",
-      flowTitle: "One visit through REDMARS",
-      flow: [
-        { step: "Reception", detail: "Registers, opens the visit and takes payment on one screen" },
-        { step: "Doctor's queue", detail: "Updates live as patients arrive" },
-        { step: "Consultation", detail: "Diagnosis, notes and prescription, all from the keyboard" },
-        { step: "Lab", detail: "Orders arrive instantly; abnormal results are flagged" },
-        { step: "Billing", detail: "Partial payments, refunds and capped discounts" },
-        { step: "Pharmacy", detail: "Sees only medicines and allergies, nothing else" },
-        { step: "Reports", detail: "Daily numbers for hospital management" },
-      ],
-      facts: [
-        { value: "47", label: "database tables" },
-        { value: "30+", label: "API modules" },
-        { value: "6 roles", label: "about 60 permissions" },
-        { value: "40", label: "patients at once in load tests" },
-      ],
-      detailsTitle: "Decisions I'm proud of",
-      details: [
-        "Every time someone opens a medical record, it's logged, not only when they change it.",
-        "A prescription is blocked if the patient is allergic. A doctor can override it, but only by giving a reason.",
-        "Backups run every night, and I tested the restore by deleting the database and bringing it back.",
-        "The interface switched between Dari and English from the first day, because adding right-to-left later means rebuilding every screen.",
-      ],
-      status: "Built and hardened. Staff training and go-live are next.",
-      code: "Read the code",
-    },
-    more: {
-      title: "More projects",
-      code: "Code",
-      live: "Try it",
-      projects: [
-        {
-          name: "Solar taxi roof sign",
-          what:
-            "A phone remote and a live 3D model of a solar LED sign for shared taxis. The Bluetooth layer is ready for real ESP32 hardware.",
-          stack: "React Three Fiber, Three.js, Web Bluetooth",
-          code: "https://github.com/shamsullahfayzi/solar-taxi-label",
-        },
-        {
-          name: "Zombie Typing",
-          what:
-            "A typing game where you stop each zombie by typing its word. Plays in English, Dari and Pashto, with a speed leaderboard.",
-          stack: "React 19, Tailwind CSS",
-          code: "https://github.com/shamsullahfayzi/zombie-typing",
-        },
-        {
-          name: "Job Center",
-          what: "A job board with two sides: seekers browse and apply, employers post jobs and review applicants.",
-          stack: "React 19, React Router",
-          code: "https://github.com/shamsullahfayzi/job-center",
-        },
-        {
-          name: "Zoya Clinic",
-          what: "Patient registration and appointment tracking for a clinic. My first healthcare app.",
-          stack: "Angular, Angular Material",
-          code: "https://github.com/shamsullahfayzi/Zoya",
-        },
-        {
-          name: "MusicMingle",
-          what: "Find and book music events, with a back office for admins.",
-          stack: "ASP.NET Core, Entity Framework",
-          code: "https://github.com/shamsullahfayzi/MusicMingle",
-        },
-      ],
-    },
-    experience: {
-      title: "Experience",
-      jobs: [
-        {
-          org: "RedwanMarsa ICT",
-          role: "Junior full-stack engineer",
-          place: "Dubai",
-          note: "Web applications with React, Next.js and NestJS.", // TODO: confirm or describe your work
-        },
-        {
-          org: "Axon Psychiatric Hospital",
-          role: "Software for hospital operations", // TODO: your exact title
-          place: "Kabul",
-          note: "Where I first built tools for clinical and administrative staff.", // TODO: confirm
-        },
-        {
-          org: "Kardan University",
-          role: "B.Sc. in Computer Engineering",
-          place: "In progress",
-          note: "",
-        },
-      ],
-      toolsTitle: "What I work with",
-      tools:
-        "TypeScript, React, Next.js, Angular, Node.js, NestJS, Python, C#, PostgreSQL, Prisma, SQL Server, Docker, Electron",
-    },
-    contact: {
-      title: "Hiring a full-stack engineer?",
-      body: "I'm based in Dubai and open to on-site and remote roles. The fastest way to reach me is email.",
-      email: "Email me",
-      linkedin: "LinkedIn",
-      github: "GitHub",
-    },
-    footer: "Built by Shamsullah Fayzi with Next.js. This site works in English and Dari.",
+export const COPY: Copy = {
+  meta: {
+    title: "Shamsullah Fayzi, full-stack software engineer",
+    description:
+      "Full-stack engineer building web apps, desktop apps, AI features, 3D interfaces and games. React, Next.js, NestJS, FastAPI, PostgreSQL, Three.js.",
   },
-
-  fa: {
-    langName: "دری",
-    switchLabel: "تغییر زبان سایت به انگلیسی",
-    nav: { work: "کارها", experience: "تجربه", contact: "تماس" },
-    hero: {
-      title: "نرم‌افزار شفاخانه می‌سازم که به دو زبان کار می‌کند و وقتی انترنت قطع شود، از کار نمی‌افتد.",
-      intro:
-        "من شمس‌الله فیضی هستم، انجنیر فول‌استک در دبی. سیستم‌ها را از دیتابیس تا صفحه‌ای که پذیرش هر روز با آن کار می‌کند طراحی می‌کنم و در کلینیک‌های واقعی افغانستان به کار می‌اندازم.",
-      seeWork: "کارهایم را ببینید",
-      cv: "دانلود سی‌وی",
-      github: "گیت‌هاب",
-    },
-    redmars: {
-      name: "سیستم شفاخانه REDMARS",
-      lede:
-        "سیستم بخش سرپایی برای یک شفاخانه روانی در کابل. تمام مراجعه مریض را، از پذیرش تا دواخانه، روی یک سرور داخل همان ساختمان و به زبان‌های دری و انگلیسی پیش می‌برد.",
-      flowTitle: "یک مراجعه در REDMARS",
-      flow: [
-        { step: "پذیرش", detail: "ثبت مریض، باز کردن مراجعه و گرفتن پول در یک صفحه" },
-        { step: "نوبت داکتر", detail: "با رسیدن هر مریض به‌روز می‌شود" },
-        { step: "معاینه", detail: "تشخیص، یادداشت و نسخه، همه با کیبورد" },
-        { step: "لابراتوار", detail: "درخواست‌ها فوری می‌رسند و نتایج غیرعادی نشانی می‌شوند" },
-        { step: "صندوق", detail: "پرداخت قسمی، بازپرداخت و تخفیف با سقف معین" },
-        { step: "دواخانه", detail: "فقط دواها و حساسیت‌ها را می‌بیند، نه چیز دیگر" },
-        { step: "گزارش‌ها", detail: "ارقام روزانه برای مدیریت شفاخانه" },
-      ],
-      facts: [
-        { value: "۴۷", label: "جدول دیتابیس" },
-        { value: "+۳۰", label: "ماژول API" },
-        { value: "۶ نقش", label: "حدود ۶۰ صلاحیت" },
-        { value: "۴۰", label: "مریض هم‌زمان در آزمایش فشار" },
-      ],
-      detailsTitle: "تصمیم‌هایی که به آن افتخار می‌کنم",
-      details: [
-        "هر بار که کسی پرونده صحی را باز کند ثبت می‌شود، نه فقط وقتی آن را تغییر دهد.",
-        "اگر مریض به دوایی حساسیت داشته باشد، نسخه متوقف می‌شود. داکتر می‌تواند آن را رد کند، اما فقط با نوشتن دلیل.",
-        "پشتیبان هر شب گرفته می‌شود و بازیابی را با پاک کردن دیتابیس و برگرداندن آن آزمایش کردم.",
-        "رابط کاربری از روز اول بین دری و انگلیسی تغییر می‌کرد، چون اضافه کردن راست‌به‌چپ در آخر یعنی ساختن دوباره هر صفحه.",
-      ],
-      status: "ساخته و محکم‌کاری شده است. آموزش کارمندان و شروع کار، قدم بعدی است.",
-      code: "دیدن کد",
-    },
-    more: {
-      title: "پروژه‌های دیگر",
-      code: "کد",
-      live: "امتحان کنید",
-      projects: [
-        {
-          name: "تابلوی سقف تکسی سولری",
-          what:
-            "ریموت موبایلی و مدل سه‌بعدی زنده یک تابلوی LED سولری برای تکسی‌های لینی. بخش بلوتوث برای سخت‌افزار واقعی ESP32 آماده است.",
-          stack: "React Three Fiber، Three.js، Web Bluetooth",
-          code: "https://github.com/shamsullahfayzi/solar-taxi-label",
-        },
-        {
-          name: "زامبی تایپینگ",
-          what: "بازی تایپ که هر زامبی را با تایپ کلمه‌اش متوقف می‌کنید. به انگلیسی، دری و پشتو، با جدول سرعت.",
-          stack: "React 19، Tailwind CSS",
-          code: "https://github.com/shamsullahfayzi/zombie-typing",
-        },
-        {
-          name: "مرکز کار",
-          what: "سایت کاریابی دو طرفه: کارجو وظیفه می‌بیند و درخواست می‌دهد، کارفرما وظیفه اعلان می‌کند و درخواست‌ها را می‌بیند.",
-          stack: "React 19، React Router",
-          code: "https://github.com/shamsullahfayzi/job-center",
-        },
-        {
-          name: "کلینیک زویا",
-          what: "ثبت مریض و پیگیری نوبت‌ها برای یک کلینیک. اولین برنامه صحی من.",
-          stack: "Angular، Angular Material",
-          code: "https://github.com/shamsullahfayzi/Zoya",
-        },
-        {
-          name: "میوزیک مینگل",
-          what: "پیدا کردن و رزرو برنامه‌های موسیقی، با بخش مدیریت برای ادمین.",
-          stack: "ASP.NET Core، Entity Framework",
-          code: "https://github.com/shamsullahfayzi/MusicMingle",
-        },
-      ],
-    },
-    experience: {
-      title: "تجربه",
-      jobs: [
-        {
-          org: "RedwanMarsa ICT",
-          role: "انجنیر فول‌استک",
-          place: "دبی",
-          note: "برنامه‌های ویب با React، Next.js و NestJS.",
-        },
-        {
-          org: "شفاخانه روانی اکسون",
-          role: "نرم‌افزار برای کارهای شفاخانه",
-          place: "کابل",
-          note: "جایی که اولین ابزارها را برای کارمندان صحی و اداری ساختم.",
-        },
-        {
-          org: "پوهنتون کاردان",
-          role: "لیسانس انجنیری کمپیوتر",
-          place: "در حال تحصیل",
-          note: "",
-        },
-      ],
-      toolsTitle: "ابزارهایی که با آن کار می‌کنم",
-      tools:
-        "TypeScript، React، Next.js، Angular، Node.js، NestJS، Python، C#، PostgreSQL، Prisma، SQL Server، Docker، Electron",
-    },
-    contact: {
-      title: "انجنیر فول‌استک استخدام می‌کنید؟",
-      body: "در دبی هستم و برای کار حضوری و از راه دور آماده‌ام. سریع‌ترین راه تماس، ایمیل است.",
-      email: "ایمیل بفرستید",
-      linkedin: "لینکدین",
-      github: "گیت‌هاب",
-    },
-    footer: "ساخته شمس‌الله فیضی با Next.js. این سایت به انگلیسی و دری کار می‌کند.",
+  nav: { work: "Work", skills: "Range", experience: "Path", contact: "Contact" },
+  hero: {
+    kicker: "Full-stack software engineer",
+    name: "Shamsullah Fayzi",
+    line: "I build whatever the problem needs: web apps, desktop apps, AI features, 3D interfaces, games.",
+    seeWork: "See the work",
+    cv: "Download CV",
+    scroll: "Scroll",
+    ticker: ["Web apps", "Desktop apps", "AI features", "3D interfaces", "Games", "Databases", "DevOps"],
   },
+  work: {
+    title: "Selected work",
+    intro: "Seven projects, one habit: ship the whole thing, from the database to the screen.",
+    code: "Read the code",
+    noCode: "No public code",
+    stack: "Built with",
+    more: "Also built",
+    enter3d: "View in 3D room",
+    projects: {
+      redmars: {
+        name: "REDMARS",
+        kind: "Hospital management system · independent product, 2026",
+        pitch:
+          "A bilingual Dari/English, right-to-left hospital system that runs on-premise, built with a Kabul hospital as design partner. Registration to pharmacy, on one server.",
+        stats: [
+          { value: "47", label: "database tables" },
+          { value: "30+", label: "API modules" },
+          { value: "6", label: "roles, ~60 permissions" },
+          { value: "40", label: "concurrent patients in load tests" },
+        ],
+        stack: ["NestJS", "Prisma", "PostgreSQL", "React 19", "TanStack Query", "Docker", "Caddy"],
+        points: [
+          "An audit trail of every write and every read of a medical record.",
+          "Allergy hard-blocks at prescribing (override needs a written reason), plus drug-interaction warnings.",
+          "Load-tested, fixed a connection-pool exhaustion, shipped in Docker behind HTTPS with nightly backups and a verified restore.",
+        ],
+      },
+      solar: {
+        name: "Solar Taxi Roof Sign",
+        kind: "Product prototype · 2026",
+        pitch:
+          "A phone controller and a real-time 3D model of a solar LED roof sign for shared taxis, showing destination, fare and free seats.",
+        stats: [
+          { value: "3D", label: "real-time twin" },
+          { value: "BLE", label: "Web Bluetooth layer" },
+        ],
+        stack: ["React 19", "React Three Fiber", "Three.js", "Zustand", "Web Bluetooth"],
+        points: [
+          "A Bluetooth transport that mirrors the Web Bluetooth API, so the simulator and real ESP32 hardware swap without UI changes.",
+        ],
+      },
+      attendance: {
+        name: "AI attendance system",
+        kind: "Team lead · university project",
+        pitch: "A camera recognises students' faces and marks attendance automatically, across multiple classes.",
+        stats: [
+          { value: "98%", label: "recognition accuracy" },
+          { value: "3", label: "person team, I led it" },
+        ],
+        stack: ["Python", "Face recognition", "Live camera input"],
+        points: [
+          "Multi-class support with separate rosters per section.",
+          "I owned the architecture and integration of the recognition module.",
+          "Won a Certificate of Appreciation.",
+        ],
+      },
+      alraheel: {
+        name: "Al-Raheel Travel Agency",
+        kind: "Client project · 2026",
+        pitch:
+          "Replaced the agency's Excel-based customer and booking process with a web system, and automated data entry by reading passport and ID details from scanned documents.",
+        stats: [{ value: "75%", label: "less manual processing time" }],
+        stack: ["Blazor (.NET 8)", "EF Core", "PostgreSQL", "ASP.NET Identity", "Azure AI Document Intelligence", "Tesseract OCR"],
+        points: [
+          "Azure AI Document Intelligence and Tesseract OCR extract the customer details.",
+          "Layered architecture on PostgreSQL, with triggers and views for complex queries and role-based sign-in.",
+        ],
+        note: "Client work, no public code",
+      },
+      trendora: {
+        name: "Trendora",
+        kind: "E-commerce platform · team lead, 2024",
+        pitch: "A full-stack store where customers buy and sellers manage their own products, led by me with a team of three.",
+        stats: [{ value: "2", label: "user sides: customers and sellers" }],
+        stack: ["React", "Next.js", "MUI", "Redux", "FastAPI", "SQLAlchemy", "SQL Server"],
+        points: [
+          "FastAPI backend with bcrypt password hashing and JWT sessions in httpOnly cookies.",
+          "Separate customer and seller roles.",
+          "Product search, filtering and cart workflows across hundreds of demo products and multiple sellers.",
+        ],
+      },
+      zombie: {
+        name: "Zombie Typing",
+        kind: "Game · 2026",
+        pitch:
+          "A typing game with live WPM and accuracy, a leaderboard, and original characters and sound. Playable in English, Dari and Pashto.",
+        stats: [{ value: "3", label: "languages" }],
+        stack: ["React 19", "Tailwind CSS", "Netlify"],
+        points: ["A pooled audio engine so rapid sound effects overlap cleanly.", "Scales to any screen, laptop to 2560px."],
+      },
+      jobcenter: {
+        name: "Job Center",
+        kind: "Web app · 2026",
+        pitch: "A two-sided job board: seekers browse and apply; employers post jobs and review applicants.",
+        stats: [{ value: "2", label: "sides, one app" }],
+        stack: ["React 19", "React Router", "Tailwind CSS"],
+        points: ["Reducer-based state and a storage layer ready to swap for a real API."],
+      },
+      prescription: {
+        name: "Prescription Management App",
+        kind: "Client project · 2025",
+        pitch:
+          "A desktop app doctors use to write prescriptions faster: pick medicine, dosage, frequency and quantity instead of writing by hand. Adopted by several doctors.",
+        stats: [],
+        stack: ["Java", "JavaFX"],
+        points: [],
+        note: "Client work, no public code",
+      },
+      zoya: {
+        name: "Zoya Clinic",
+        kind: "Client project · 2024",
+        pitch:
+          "Patient registration and appointment tracking for a private clinic, with JWT login, role-guarded routes and admin dashboards.",
+        stats: [],
+        stack: ["Angular 16", "Angular Material", "RxJS", "JWT", "ApexCharts"],
+        points: [],
+      },
+      musicmingle: {
+        name: "MusicMingle",
+        kind: "Event booking site",
+        pitch: "An event booking site with an admin back office.",
+        stats: [],
+        stack: ["ASP.NET Core 9", "EF Core", "Identity"],
+        points: [],
+      },
+    },
+  },
+  skills: {
+    title: "Range",
+    intro: "Not a list of logos. Pick a skill and see where I've actually used it.",
+    hint: "Select a skill",
+    usedIn: "Used in",
+    none: "On my CV, no project card for it yet.",
+    together: "Often used together with",
+    groups: [
+      {
+        id: "lang",
+        name: "Languages",
+        blurb: "Seven, used for real work.",
+        items: ["JavaScript", "TypeScript", "Python", "C#", "Java", "Go", "SQL"],
+      },
+      {
+        id: "front",
+        name: "Frontend",
+        blurb: "From dashboards to 3D scenes.",
+        items: ["React", "Next.js", "Angular", "Vue", "Blazor", "Tailwind", "Bootstrap", "MUI", "Chakra UI", "Redux", "TanStack Query"],
+      },
+      {
+        id: "three",
+        name: "3D & Devices",
+        blurb: "Real-time graphics, talking to hardware.",
+        items: ["Three.js", "React Three Fiber", "Web Bluetooth"],
+      },
+      {
+        id: "back",
+        name: "Backend",
+        blurb: "APIs that hold up.",
+        items: ["Node.js", "Express", "NestJS", "FastAPI", "ASP.NET Core", "REST APIs", "JWT auth", "Role-based access control"],
+      },
+      {
+        id: "data",
+        name: "Databases",
+        blurb: "Relational first, others when they fit.",
+        items: ["PostgreSQL", "SQL Server", "MySQL", "MongoDB", "Oracle", "Prisma", "Firebase", "Supabase"],
+      },
+      {
+        id: "ai",
+        name: "AI / ML",
+        blurb: "Models wired into real products.",
+        items: [
+          "LLM integration",
+          "RAG pipelines",
+          "Hugging Face",
+          "Prompt engineering",
+          "MCP services",
+          "Azure AI Document Intelligence",
+          "OCR (Tesseract)",
+          "Face recognition",
+        ],
+      },
+      {
+        id: "ops",
+        name: "Desktop & DevOps",
+        blurb: "Ship it and keep it running.",
+        items: ["Electron", "JavaFX", "Docker", "Caddy", "Linux", "Azure", "Git", "GitHub", "CI/CD"],
+      },
+    ],
+  },
+  experience: {
+    title: "Path",
+    present: "Present",
+    jobs: [
+      {
+        org: "RedwanMarsa ICT",
+        role: "Junior Software Engineer",
+        place: "Kabul",
+        dates: "Aug 2025 – Present",
+        points: [
+          "Built and deployed the Al-Raheel Travel Agency system, replacing an Excel-based process and cutting manual processing time by 75%.",
+          "Integrated AI models to automatically extract customer details.",
+          "Built a JavaFX prescription app used by several doctors (dosage, frequency, quantity, medicine selection).",
+          "Clean architecture with advanced PostgreSQL (triggers, views for complex queries).",
+        ],
+      },
+      {
+        org: "Axon Psychiatric Hospital",
+        role: "Junior Software Engineer",
+        place: "Kabul",
+        dates: "Apr 2024 – Jul 2025",
+        points: [
+          "Helped build the hospital's official website, which met a Ministry of Health requirement.",
+          "IT infrastructure: network setup, system maintenance and technical support across departments.",
+        ],
+      },
+      {
+        org: "Freelance & independent products",
+        role: "Self-employed full-stack developer",
+        place: "",
+        dates: "2024 – Present",
+        points: ["Client work and independent products, built alongside full-time university study."],
+      },
+      {
+        org: "Kardan University",
+        role: "B.Sc. Computer Engineering",
+        place: "Kabul",
+        dates: "Expected April 2028",
+        points: [],
+      },
+    ],
+  },
+  contact: {
+    title: "Let's build something",
+    words: ["useful.", "fast.", "3D.", "playable.", "smart."],
+    body: "Open to roles and projects. Email is the fastest way to reach me.",
+    email: "Email me",
+    linkedin: "LinkedIn",
+    github: "GitHub",
+    copy: "Copy email",
+    copied: "Copied",
+    time: "Dubai",
+  },
+  footer: "Built by Shamsullah Fayzi.",
+  placeholder: { photo: "Photo goes here", screenshot: "Screenshot goes here" },
 };
