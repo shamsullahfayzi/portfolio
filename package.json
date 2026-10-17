@@ -1,7 +1,7 @@
 {
   "name": "portfolio",
   "version": "1.0.0",
-  "description": "Shamsullah Fayzi's portfolio site (English / Dari)",
+  "description": "Shamsullah Fayzi's portfolio site",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
