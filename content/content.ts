@@ -4,7 +4,7 @@
 export const LINKS = {
   github: "https://github.com/shamsullahfayzi",
   linkedin: "https://www.linkedin.com/in/shamsullah-fayzi-b41884380/",
-  email: "shams.fayzi@gmail.com",
+  email: "hello@shamsullahfayzi.dev",
   cv: "/cv.pdf", // public/cv.pdf (the button hides itself if this is emptied)
   photo: "/me.jpg", // public/me.jpg (a marked placeholder shows if this is emptied)
 };
