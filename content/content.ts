@@ -33,9 +33,18 @@ export const PROJECT_LINKS: Partial<Record<ProjectId, string>> = {
 
 export type SkillUse = { project?: ProjectId; note?: string };
 
-// Where each skill shows up. A skill missing here simply has no project card yet (the UI says so).
+// Where each skill shows up: project cards where the CV names one, otherwise a short note.
 export const SKILL_USE: Record<string, SkillUse[]> = {
-  React: [{ project: "redmars" }, { project: "trendora" }, { project: "zombie" }, { project: "jobcenter" }, { note: "This portfolio" }],
+  // Languages. JS/TS go wherever React, Next.js, NestJS or Angular is in the stack; SQL wherever the CV names a database.
+  JavaScript: [{ project: "redmars" }, { project: "solar" }, { project: "trendora" }, { project: "zombie" }, { project: "jobcenter" }, { note: "This portfolio" }],
+  TypeScript: [{ project: "redmars" }, { project: "solar" }, { project: "trendora" }, { project: "zoya" }, { project: "zombie" }, { project: "jobcenter" }, { note: "This portfolio" }],
+  Python: [{ project: "trendora" }, { project: "attendance" }],
+  "C#": [{ project: "alraheel" }, { project: "musicmingle" }],
+  Java: [{ project: "prescription" }],
+  SQL: [{ project: "redmars" }, { project: "alraheel" }, { project: "trendora" }, { project: "musicmingle" }],
+
+  // Frontend
+  React: [{ project: "redmars" }, { project: "solar" }, { project: "trendora" }, { project: "zombie" }, { project: "jobcenter" }, { note: "This portfolio" }],
   "Next.js": [{ project: "trendora" }, { note: "This portfolio" }],
   Angular: [{ project: "zoya" }],
   Blazor: [{ project: "alraheel" }],
@@ -43,27 +52,58 @@ export const SKILL_USE: Record<string, SkillUse[]> = {
   MUI: [{ project: "trendora" }],
   Redux: [{ project: "trendora" }],
   "TanStack Query": [{ project: "redmars" }],
-  NestJS: [{ project: "redmars" }],
-  FastAPI: [{ project: "trendora" }],
-  "ASP.NET Core": [{ project: "alraheel" }, { project: "musicmingle" }],
-  "REST APIs": [{ project: "redmars" }],
-  "JWT auth": [{ project: "trendora" }, { project: "zoya" }],
-  "Role-based access control": [{ project: "redmars" }, { project: "trendora" }, { project: "alraheel" }],
-  PostgreSQL: [{ project: "redmars" }, { project: "alraheel" }],
-  "SQL Server": [{ project: "trendora" }],
-  Prisma: [{ project: "redmars" }],
-  Python: [{ project: "trendora" }, { project: "attendance" }],
-  "C#": [{ project: "alraheel" }, { project: "musicmingle" }],
-  Java: [{ project: "prescription" }],
-  JavaFX: [{ project: "prescription" }],
+
+  // 3D & devices
   "Three.js": [{ project: "solar" }, { note: "This portfolio" }],
   "React Three Fiber": [{ project: "solar" }, { note: "This portfolio" }],
   "Web Bluetooth": [{ project: "solar" }],
-  "Face recognition": [{ project: "attendance" }],
+
+  // Backend
+  "Node.js": [{ project: "redmars" }, { project: "trendora" }, { note: "This portfolio" }],
+  NestJS: [{ project: "redmars" }],
+  FastAPI: [{ project: "trendora" }],
+  "ASP.NET Core": [{ project: "alraheel" }, { project: "musicmingle" }],
+  "REST APIs": [{ project: "redmars" }, { project: "trendora" }],
+  "JWT auth": [{ project: "trendora" }, { project: "zoya" }],
+  "Role-based access control": [{ project: "redmars" }, { project: "trendora" }, { project: "alraheel" }, { project: "zoya" }],
+
+  // Databases
+  PostgreSQL: [{ project: "redmars" }, { project: "alraheel" }],
+  "SQL Server": [{ project: "trendora" }],
+  Prisma: [{ project: "redmars" }],
+
+  // AI / ML
   "Azure AI Document Intelligence": [{ project: "alraheel" }],
   "OCR (Tesseract)": [{ project: "alraheel" }],
+  "Face recognition": [{ project: "attendance" }],
+
+  // Desktop & DevOps
+  JavaFX: [{ project: "prescription" }],
   Docker: [{ project: "redmars" }],
   Caddy: [{ project: "redmars" }],
+  Azure: [{ project: "alraheel" }],
+  Git: [{ project: "redmars" }, { project: "solar" }, { project: "zombie" }, { project: "jobcenter" }, { project: "zoya" }, { project: "musicmingle" }, { note: "This portfolio" }],
+  GitHub: [{ project: "redmars" }, { project: "solar" }, { project: "zombie" }, { project: "jobcenter" }, { project: "zoya" }, { project: "musicmingle" }, { note: "This portfolio" }],
+
+  // Skills with no project card: learned at university, then used on private projects (not public).
+  Go: [{ note: "Studied at Kardan University." }, { note: "Used in my private projects." }],
+  Vue: [{ note: "Studied at Kardan University." }, { note: "Used in my private projects." }],
+  Bootstrap: [{ note: "Studied at Kardan University." }, { note: "Used in my private projects." }],
+  "Chakra UI": [{ note: "Studied at Kardan University." }, { note: "Used in my private projects." }],
+  Express: [{ note: "Studied at Kardan University." }, { note: "Used in my private projects." }],
+  Firebase: [{ note: "Studied at Kardan University." }, { note: "Used in my private projects." }],
+  Supabase: [{ note: "Studied at Kardan University." }, { note: "Used in my private projects." }],
+  "LLM integration": [{ note: "Studied at Kardan University." }, { note: "Used in my private projects." }],
+  "RAG pipelines": [{ note: "Studied at Kardan University." }, { note: "Used in my private projects." }],
+  "Hugging Face": [{ note: "Studied at Kardan University." }, { note: "Used in my private projects." }],
+  "Prompt engineering": [{ note: "Studied at Kardan University." }, { note: "Used in my private projects." }],
+  "MCP services": [{ note: "Studied at Kardan University." }, { note: "Used in my private projects." }],
+  Electron: [{ note: "Studied at Kardan University." }, { note: "Used in my private projects." }],
+  "CI/CD": [{ note: "Studied at Kardan University." }, { note: "Used in my private projects." }],
+  MySQL: [{ note: "Dived deep into it at Kardan University: schemas, joins and how queries really run." }, { note: "Used in my private projects." }],
+  Oracle: [{ note: "Dived deep into it at Kardan University, down to how the engine stores and plans a query." }, { note: "Used in my private projects." }],
+  MongoDB: [{ note: "Dived deep into it at Kardan University, from document modelling to aggregation pipelines." }, { note: "Used in my private projects." }],
+  Linux: [{ note: "Dived deep into it at Kardan University: the shell, processes and permissions." }, { note: "Used in my private projects." }],
 };
 
 // Project ids that get a full-size feature treatment, in display order.
@@ -85,11 +125,11 @@ export type Project = {
 
 export type SkillGroup = { id: string; name: string; blurb: string; items: string[] };
 
-export type Job = { org: string; role: string; place: string; dates: string; points: string[] };
+export type Step = { label: string; title: string; text: string; proof: ProjectId[] };
 
 type Copy = {
   meta: { title: string; description: string };
-  nav: { work: string; skills: string; experience: string; contact: string };
+  nav: { work: string; skills: string; process: string; contact: string };
   hero: {
     kicker: string;
     name: string;
@@ -110,7 +150,7 @@ type Copy = {
     projects: Record<ProjectId, Project>;
   };
   skills: { title: string; intro: string; hint: string; usedIn: string; none: string; together: string; groups: SkillGroup[] };
-  experience: { title: string; present: string; jobs: Job[] };
+  process: { title: string; intro: string; proofLabel: string; studying: string; steps: Step[] };
   contact: {
     title: string;
     words: string[];
@@ -132,7 +172,7 @@ export const COPY: Copy = {
     description:
       "Full-stack engineer building web apps, desktop apps, AI features, 3D interfaces and games. React, Next.js, NestJS, FastAPI, PostgreSQL, Three.js.",
   },
-  nav: { work: "Work", skills: "Range", experience: "Path", contact: "Contact" },
+  nav: { work: "Work", skills: "Range", process: "Process", contact: "Contact" },
   hero: {
     kicker: "Full-stack software engineer",
     name: "Shamsullah Fayzi",
@@ -271,10 +311,10 @@ export const COPY: Copy = {
   },
   skills: {
     title: "Range",
-    intro: "Not a list of logos. Pick a skill and see where I've actually used it.",
+    intro: "Pick a skill to see the projects it went into.",
     hint: "Select a skill",
     usedIn: "Used in",
-    none: "On my CV, no project card for it yet.",
+    none: "On my CV. Ask me where I’ve used it.",
     together: "Often used together with",
     groups: [
       {
@@ -330,45 +370,41 @@ export const COPY: Copy = {
       },
     ],
   },
-  experience: {
-    title: "Path",
-    present: "Present",
-    jobs: [
+  process: {
+    title: "How I work",
+    intro: "Self-employed since 2024: client work and my own products, from the first conversation to a running deployment.",
+    proofLabel: "See it in",
+    studying: "Alongside the work: B.Sc. Computer Engineering at Kardan University, expected April 2028.",
+    steps: [
       {
-        org: "RedwanMarsa ICT",
-        role: "Junior Software Engineer",
-        place: "Kabul",
-        dates: "Aug 2025 – Present",
-        points: [
-          "Built and deployed the Al-Raheel Travel Agency system, replacing an Excel-based process and cutting manual processing time by 75%.",
-          "Integrated AI models to automatically extract customer details.",
-          "Built a JavaFX prescription app used by several doctors (dosage, frequency, quantity, medicine selection).",
-          "Clean architecture with advanced PostgreSQL (triggers, views for complex queries).",
-        ],
+        label: "01",
+        title: "Start with the people",
+        text: "I work out how the job gets done today before I design anything. REDMARS grew with a Kabul hospital as design partner; Al-Raheel replaced an agency’s Excel process.",
+        proof: ["redmars", "alraheel"],
       },
       {
-        org: "Axon Psychiatric Hospital",
-        role: "Junior Software Engineer",
-        place: "Kabul",
-        dates: "Apr 2024 – Jul 2025",
-        points: [
-          "Helped build the hospital's official website, which met a Ministry of Health requirement.",
-          "IT infrastructure: network setup, system maintenance and technical support across departments.",
-        ],
+        label: "02",
+        title: "Model the data first",
+        text: "A solid schema makes everything after it simpler. REDMARS runs on 47 PostgreSQL tables; Al-Raheel uses triggers and views for its complex queries.",
+        proof: ["redmars", "alraheel"],
       },
       {
-        org: "Freelance & independent products",
-        role: "Self-employed full-stack developer",
-        place: "",
-        dates: "2024 – Present",
-        points: ["Client work and independent products, built alongside full-time university study."],
+        label: "03",
+        title: "Build the API and the interface",
+        text: "Typed APIs with interfaces made for the people using them: bilingual right-to-left screens, a desktop app, a 3D phone controller.",
+        proof: ["redmars", "prescription", "solar"],
       },
       {
-        org: "Kardan University",
-        role: "B.Sc. Computer Engineering",
-        place: "Kabul",
-        dates: "Expected April 2028",
-        points: [],
+        label: "04",
+        title: "Make it safe",
+        text: "Rules are enforced on the server, not just hidden in the UI: 6 roles and about 60 permissions, an audit trail, allergy hard-blocks at prescribing, hashed passwords and httpOnly sessions.",
+        proof: ["redmars", "trendora"],
+      },
+      {
+        label: "05",
+        title: "Ship it and keep it running",
+        text: "Load-tested with 40 concurrent patients, fixed a connection-pool exhaustion, then shipped in Docker containers behind HTTPS with nightly backups and a verified restore.",
+        proof: ["redmars"],
       },
     ],
   },

@@ -1,0 +1,450 @@
+/* ── Mini demos for the smaller projects. Each owns its palette (tokens on the root), flat, 44px targets. ── */
+
+.minor > ul > li {
+  --bg: var(--paper);
+  --fg: var(--ink);
+  --card: #fffdf8;
+  --card-fg: var(--ink);
+  --hi: var(--accent-ink);
+}
+.minor-demo {
+  margin-block-start: 12px;
+  min-inline-size: 0;
+}
+.minor .demo {
+  border-width: 2px;
+  box-shadow: none;
+}
+.minor .demo-body {
+  padding: 0;
+}
+.minor .demo-skeleton {
+  min-block-size: 300px;
+}
+
+.pm,
+.zy,
+.mm {
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+.pm button,
+.zy button,
+.mm button,
+.pm select {
+  min-block-size: 44px;
+  font: inherit;
+  cursor: pointer;
+}
+.pm button:focus-visible,
+.zy button:focus-visible,
+.mm button:focus-visible,
+.pm select:focus-visible {
+  outline: 3px solid var(--tok-ring);
+  outline-offset: 2px;
+}
+.pm button:disabled,
+.zy button:disabled,
+.mm button:disabled {
+  cursor: not-allowed;
+}
+.pm small,
+.zy small,
+.mm small {
+  display: block;
+  font-size: 0.78rem;
+}
+
+/* ── Prescription: pharmacy green + trust blue, flat desktop window ── */
+.pm {
+  --tok-bg: #f0fdf4;
+  --tok-fg: #14532d;
+  --tok-primary: #15803d;
+  --tok-blue: #0369a1;
+  --tok-line: #86efac;
+  --tok-ring: #0369a1;
+  background: var(--tok-bg);
+  color: var(--tok-fg);
+}
+.pm-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: #dcfce7;
+  border-block-end: 1px solid var(--tok-line);
+}
+.pm-title span {
+  inline-size: 11px;
+  block-size: 11px;
+  border-radius: 50%;
+  background: var(--tok-primary);
+  opacity: 0.55;
+}
+.pm-title b {
+  margin-inline-start: 8px;
+  font-size: 0.8rem;
+}
+.pm-body {
+  display: grid;
+  gap: 14px;
+  padding: 14px;
+}
+.pm-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.pm-form label {
+  display: grid;
+  gap: 4px;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+.pm select {
+  inline-size: 100%;
+  padding-inline: 10px;
+  border: 1.5px solid var(--tok-primary);
+  border-radius: 4px;
+  background: #fff;
+  color: var(--tok-fg);
+}
+.pm-add {
+  grid-column: 1 / -1;
+  border: 0;
+  border-radius: 4px;
+  background: var(--tok-primary);
+  color: #fff;
+  font-weight: 700;
+  transition: background-color 150ms;
+}
+.pm-add:hover {
+  background: #166534;
+}
+.pm-sheet {
+  background: #fff;
+  border: 1.5px solid var(--tok-line);
+  border-radius: 4px;
+}
+.pm-h {
+  margin: 0;
+  padding: 8px 12px;
+  background: var(--tok-blue);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+.pm-sheet ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.pm-sheet li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 4px 4px 4px 12px;
+  border-block-start: 1px solid #dcfce7;
+}
+.pm-sheet li:first-child {
+  border-block-start: 0;
+}
+.pm-sheet li button {
+  inline-size: 44px;
+  border: 0;
+  background: transparent;
+  color: #b91c1c;
+}
+.pm-empty {
+  margin: 0;
+  padding: 14px 12px;
+}
+
+/* ── Zoya Clinic: calendar blue, available green, accessible contrast ── */
+.zy {
+  --tok-bg: #f0f9ff;
+  --tok-fg: #0f172a;
+  --tok-primary: #0369a1;
+  --tok-free: #047857;
+  --tok-line: #bae6fd;
+  --tok-ring: #0369a1;
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+  background: var(--tok-bg);
+  color: var(--tok-fg);
+}
+.zy-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  justify-content: space-between;
+}
+.zy-seg {
+  display: inline-flex;
+  border: 1.5px solid var(--tok-primary);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.zy-seg button {
+  padding-inline: 12px;
+  border: 0;
+  background: #fff;
+  color: var(--tok-primary);
+  font-weight: 600;
+  transition: background-color 150ms, color 150ms;
+}
+.zy-seg button[aria-pressed="true"],
+.zy-seg button[aria-selected="true"] {
+  background: var(--tok-primary);
+  color: #fff;
+}
+.zy-days {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+}
+.zy-days button {
+  border: 1.5px solid var(--tok-line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--tok-fg);
+  font-weight: 600;
+}
+.zy-days button[aria-pressed="true"] {
+  border-color: var(--tok-primary);
+  background: #e0f2fe;
+  color: var(--tok-primary);
+}
+.zy-slots {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.zy-slots button {
+  inline-size: 100%;
+  padding: 4px;
+  border: 1.5px solid var(--tok-free);
+  border-radius: 8px;
+  background: #ecfdf5;
+  color: var(--tok-free);
+  font-weight: 700;
+  transition: background-color 150ms;
+}
+.zy-slots button:hover:not(:disabled) {
+  background: #d1fae5;
+}
+.zy-slots button:disabled {
+  border-color: #cbd5e1;
+  background: #f1f5f9;
+  color: #475569;
+}
+.zy-chart,
+.zy-lock {
+  min-block-size: 190px;
+  padding: 12px;
+  border: 1.5px solid var(--tok-line);
+  border-radius: 8px;
+  background: #fff;
+}
+.zy-h {
+  margin: 0 0 8px;
+  font-weight: 700;
+}
+.zy-chart ul {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+  block-size: 140px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.zy-chart li {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  justify-items: center;
+  gap: 4px;
+  font-size: 0.8rem;
+}
+.zy-bar {
+  align-self: end;
+  inline-size: 100%;
+  max-inline-size: 44px;
+  min-block-size: 22px;
+  border-radius: 6px 6px 0 0;
+  background: var(--tok-primary);
+  color: #fff;
+  text-align: center;
+  transition: block-size 300ms;
+}
+.zy-lock {
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: 12px;
+}
+.zy-lock p {
+  margin: 0;
+}
+.zy-lock button {
+  padding-inline: 16px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--tok-primary);
+  color: #fff;
+  font-weight: 700;
+}
+
+/* ── MusicMingle: dark, bold blocks, green = available, red = sold out ── */
+.mm {
+  --tok-bg: #020617;
+  --tok-card: #1e293b;
+  --tok-fg: #f8fafc;
+  --tok-line: #334155;
+  --tok-go: #22c55e;
+  --tok-ring: #facc15;
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+  background: var(--tok-bg);
+  color: var(--tok-fg);
+}
+.mm-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.mm-logo {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+.mm-logo span {
+  color: var(--tok-go);
+}
+.mm-seg {
+  display: inline-flex;
+  border: 2px solid var(--tok-line);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.mm-seg button {
+  padding-inline: 16px;
+  border: 0;
+  background: transparent;
+  color: var(--tok-fg);
+  font-weight: 700;
+  transition: background-color 150ms, color 150ms;
+}
+.mm-seg button[aria-pressed="true"] {
+  background: var(--tok-fg);
+  color: var(--tok-bg);
+}
+.mm-list,
+.mm-admin ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.mm-list li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border-radius: 12px;
+  background: var(--tok-card);
+}
+.mm-date {
+  display: grid;
+  place-items: center;
+  inline-size: 56px;
+  block-size: 56px;
+  border-radius: 10px;
+  background: #facc15;
+  color: var(--tok-bg);
+  font-weight: 800;
+  font-size: 0.8rem;
+  text-align: center;
+}
+.mm-info small {
+  color: #cbd5e1;
+}
+.mm-list button {
+  padding-inline: 18px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--tok-go);
+  color: #052e16;
+  font-weight: 800;
+  transition: filter 150ms, transform 150ms;
+}
+.mm-list button:hover:not(:disabled) {
+  filter: brightness(1.1);
+}
+.mm-list button:active:not(:disabled) {
+  transform: scale(0.97);
+}
+.mm-list button:disabled {
+  background: transparent;
+  border: 2px solid #f87171;
+  color: #fca5a5;
+}
+.mm-admin {
+  display: grid;
+  gap: 10px;
+}
+.mm-h {
+  margin: 0;
+  font-weight: 800;
+}
+.mm-admin li {
+  display: grid;
+  gap: 6px;
+  padding: 10px;
+  border-radius: 12px;
+  background: var(--tok-card);
+}
+.mm-admin small {
+  display: inline;
+  color: #cbd5e1;
+}
+.mm-meter {
+  display: block;
+  block-size: 10px;
+  border-radius: 999px;
+  background: var(--tok-bg);
+  overflow: hidden;
+}
+.mm-meter i {
+  display: block;
+  block-size: 100%;
+  background: var(--tok-go);
+  transition: inline-size 300ms;
+}
+.mm-ghost {
+  justify-self: start;
+  padding-inline: 16px;
+  border: 2px solid var(--tok-line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--tok-fg);
+  font-weight: 700;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pm *,
+  .zy *,
+  .mm * {
+    transition: none !important;
+  }
+}

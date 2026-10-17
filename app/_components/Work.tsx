@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import "./work.css";
+import "./minor.css";
 import { COPY, FEATURED, MINOR, PROJECT_LINKS } from "../../content/content";
 import { gsap, ScrollTrigger } from "../_lib/gsap";
 import { LazyMount, useReducedMotion, useRoomCapable } from "../_lib/motion";
@@ -128,6 +129,7 @@ export default function Work() {
           {MINOR.map((id) => {
             const p = t.projects[id];
             const repo = PROJECT_LINKS[id];
+            const Demo = DEMOS[id];
             return (
               <li key={id} data-reveal={!room || undefined}>
                 <p className="mono">{p.kind}</p>
@@ -135,6 +137,13 @@ export default function Work() {
                 <p>{p.pitch}</p>
                 <p className="chips-inline mono">{p.stack.join(" · ")}</p>
                 {repo ? <ExternalLink href={repo}>{t.code}</ExternalLink> : p.note && <p className="mono">{p.note}</p>}
+                {Demo && (
+                  <div className="minor-demo">
+                    <LazyMount fallback={<div className="demo demo-skeleton" aria-hidden="true" />}>
+                      <Demo />
+                    </LazyMount>
+                  </div>
+                )}
               </li>
             );
           })}

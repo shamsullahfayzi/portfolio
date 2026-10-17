@@ -6,14 +6,17 @@ export default function DemoFrame({
   note = "Fake data",
   children,
   className = "",
+  open = false,
 }: {
   label: string;
   note?: string;
   children: ReactNode;
   className?: string;
+  /** skip the shared input/button restyling, for demos that bring their own component styles */
+  open?: boolean;
 }) {
   return (
-    <div className={`demo ${className}`}>
+    <div className={`demo ${open ? "demo-open" : ""} ${className}`}>
       <div className="demo-bar mono">
         <span>{label}</span>
         <span>{note}</span>

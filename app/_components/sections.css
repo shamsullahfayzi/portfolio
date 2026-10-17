@@ -132,7 +132,7 @@
   }
 }
 
-/* ── Experience timeline ── */
+/* ── Process timeline ── */
 .tl {
   position: relative;
   list-style: none;
@@ -193,10 +193,41 @@
   line-height: 1;
   letter-spacing: -0.035em;
 }
-.tl-role {
-  margin-block-start: 8px;
+.tl-step {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 700;
+  color: var(--accent-ink);
+}
+.tl-text {
+  margin-block-start: 14px;
+  max-inline-size: 58ch;
+}
+.tl-proof {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 18px;
+  margin-block-start: 14px;
+}
+.tl-proof .mono {
   color: var(--ink-2);
+}
+.tl-proof a {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 44px;
   font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 6px;
+  text-decoration-color: var(--accent);
+}
+.tl-proof a:hover {
+  text-decoration-color: var(--ink);
+}
+.tl-studying {
+  margin-block-start: clamp(40px, 6vw, 72px);
+  color: var(--ink-2);
 }
 .tl-card ul {
   display: grid;

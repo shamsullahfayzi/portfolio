@@ -4,7 +4,7 @@ import Hero from "./_components/Hero";
 import Marquee from "./_components/Marquee";
 import Work from "./_components/Work";
 import Skills from "./_components/Skills";
-import Experience from "./_components/Experience";
+import Process from "./_components/Process";
 import Contact from "./_components/Contact";
 import Cursor from "./_components/Cursor";
 
@@ -25,7 +25,7 @@ export default function Site() {
         <nav aria-label="Sections">
           <a href="#work">{t.nav.work}</a>
           <a href="#skills">{t.nav.skills}</a>
-          <a href="#experience">{t.nav.experience}</a>
+          <a href="#process">{t.nav.process}</a>
           <a href="#contact">{t.nav.contact}</a>
         </nav>
       </header>
@@ -37,7 +37,7 @@ export default function Site() {
         <Work />
 
         <Skills />
-        <Experience />
+        <Process />
         <Contact />
       </main>
 

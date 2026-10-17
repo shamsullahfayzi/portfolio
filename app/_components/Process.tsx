@@ -5,9 +5,9 @@ import { COPY } from "../../content/content";
 import { gsap, ScrollTrigger } from "../_lib/gsap";
 import { useReducedMotion } from "../_lib/motion";
 
-/** Timeline whose rail draws itself as you scroll; each stop lights up when it arrives. */
-export default function Experience() {
-  const t = COPY.experience;
+/** How I work: a rail that draws itself as you scroll; each step lights up when it arrives. */
+export default function Process() {
+  const t = COPY.process;
   const root = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
 
@@ -51,34 +51,36 @@ export default function Experience() {
   }, [reduce]);
 
   return (
-    <section ref={root} id="experience" className="wrap section" aria-labelledby="exp-title">
-      <h2 id="exp-title" className="section-title">
+    <section ref={root} id="process" className="wrap section" aria-labelledby="process-title">
+      <h2 id="process-title" className="section-title">
         {t.title}
       </h2>
+      <p className="section-intro">{t.intro}</p>
 
       <ol className="tl">
         <span className="tl-line" aria-hidden="true" />
-        {t.jobs.map((j) => (
-          <li key={j.org} className="tl-item">
-            <p className="tl-date mono">{j.dates}</p>
+        {t.steps.map((s) => (
+          <li key={s.label} className="tl-item">
+            <p className="tl-date tl-step mono">{s.label}</p>
             <span className="tl-node" aria-hidden="true" />
             <div className="tl-card">
-              <h3>{j.org}</h3>
-              <p className="tl-role">
-                {j.role}
-                {j.place ? ` · ${j.place}` : ""}
+              <h3>{s.title}</h3>
+              <p className="tl-text">{s.text}</p>
+              <p className="tl-proof">
+                <span className="mono">{t.proofLabel}</span>
+                {s.proof.map((id) => (
+                  <a key={id} href={`#n-${id}`}>
+                    {COPY.work.projects[id].name}
+                    <span aria-hidden="true"> →</span>
+                  </a>
+                ))}
               </p>
-              {j.points.length > 0 && (
-                <ul>
-                  {j.points.map((p) => (
-                    <li key={p}>{p}</li>
-                  ))}
-                </ul>
-              )}
             </div>
           </li>
         ))}
       </ol>
+
+      <p className="tl-studying mono">{t.studying}</p>
     </section>
   );
 }
