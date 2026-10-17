@@ -1,0 +1,10 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "portfolio",
+  "compatibility_date": "2026-10-12",
+  // The site is a static export (`next build` writes ./out), so Cloudflare only has to serve those files.
+  "assets": {
+    "directory": "./out",
+    "not_found_handling": "404-page"
+  }
+}
