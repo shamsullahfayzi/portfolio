@@ -589,3 +589,18 @@ a {
     scroll-behavior: auto !important;
   }
 }
+
+/* Modals sit in the browser's top layer, above the custom pointer, so while one is open the system pointer takes over. */
+.custom-cursor:has(dialog[open]),
+.custom-cursor:has(dialog[open]) * {
+  cursor: auto !important;
+}
+.custom-cursor:has(dialog[open]) :is(a, button, summary, label, [role="button"], select) {
+  cursor: pointer !important;
+}
+.custom-cursor:has(dialog[open]) :is(input:not([type="range"]), textarea) {
+  cursor: text !important;
+}
+.custom-cursor:has(dialog[open]) :is(.cursor-arrow, .cursor-glow) {
+  display: none;
+}

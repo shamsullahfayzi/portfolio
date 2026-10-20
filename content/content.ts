@@ -34,6 +34,7 @@ export const PROJECT_LINKS: Partial<Record<ProjectId, string>> = {
 
 // Live sites, shown beside the code link.
 export const LIVE_LINKS: Partial<Record<ProjectId, string>> = {
+  solar: "https://solar-taxi-label.netlify.app/",
   farhat: "https://www.farhat.af",
   zombie: "https://zombie-typing.netlify.app/",
 };
