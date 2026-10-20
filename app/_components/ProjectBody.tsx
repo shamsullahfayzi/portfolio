@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
-import { COPY, PROJECT_LINKS, type ProjectId } from "../../content/content";
+import RequestDemo from "./RequestDemo";
+import { COPY, DEMO_REQUEST, LIVE_LINKS, PROJECT_LINKS, type ProjectId } from "../../content/content";
 
 export function ExternalLink({ href, children }: { href: string; children: ReactNode }) {
   return (
@@ -29,6 +30,7 @@ export default function ProjectBody({
   const t = COPY.work;
   const p = t.projects[id];
   const repo = PROJECT_LINKS[id];
+  const live = LIVE_LINKS[id];
   const r = reveal ? { "data-reveal": true } : {};
 
   return (
@@ -72,7 +74,10 @@ export default function ProjectBody({
         </ul>
 
         <p className="proj-links" {...r}>
-          {repo ? <ExternalLink href={repo}>{t.code}</ExternalLink> : <span className="mono">{p.note ?? t.noCode}</span>}
+          {live && <ExternalLink href={live}>{t.live}</ExternalLink>}
+          {repo ? <ExternalLink href={repo}>{t.code}</ExternalLink> : !live && <span className="mono">{p.note ?? t.noCode}</span>}
+          {DEMO_REQUEST.includes(id) && <RequestDemo project={p.name} />}
+          {!repo && p.note && (live || DEMO_REQUEST.includes(id)) && <span className="mono">{p.note}</span>}
         </p>
       </div>
 

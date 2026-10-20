@@ -31,6 +31,14 @@ export const PROJECT_LINKS: Partial<Record<ProjectId, string>> = {
   musicmingle: "https://github.com/shamsullahfayzi/MusicMingle",
 };
 
+// Live sites, shown beside the code link.
+export const LIVE_LINKS: Partial<Record<ProjectId, string>> = {
+  zombie: "https://zombie-typing.netlify.app/",
+};
+
+// Private projects: visitors ask me for a walk-through instead of opening a link.
+export const DEMO_REQUEST: ProjectId[] = ["redmars", "alraheel"];
+
 export type SkillUse = { project?: ProjectId; note?: string };
 
 // Where each skill shows up: project cards where the CV names one, otherwise a short note.
@@ -143,7 +151,12 @@ type Copy = {
     title: string;
     intro: string;
     code: string;
+    live: string;
     noCode: string;
+    request: {
+      button: string; title: string; sub: string; name: string; email: string; message: string;
+      placeholder: string; send: string; close: string; note: string;
+    };
     stack: string;
     more: string;
     enter3d: string;
@@ -186,6 +199,19 @@ export const COPY: Copy = {
     title: "Selected work",
     intro: "Seven projects, one habit: ship the whole thing, from the database to the screen.",
     code: "Read the code",
+    live: "Live site",
+    request: {
+      button: "Request demo",
+      title: "Request a demo of",
+      sub: "Tell me who you are and what you would like to see. I reply personally, usually within a day.",
+      name: "Your name",
+      email: "Your email",
+      message: "Message",
+      placeholder: "What would you like to see, and when suits you?",
+      send: "Send request",
+      close: "Close",
+      note: "This opens your email app with the message ready to send.",
+    },
     noCode: "No public code",
     stack: "Built with",
     more: "Also built",

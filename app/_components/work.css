@@ -643,3 +643,97 @@
   text-align: center;
   color: var(--ink-2);
 }
+
+/* ── Project links row + request-demo dialog ── */
+.proj-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 28px;
+}
+.req-btn {
+  min-block-size: 44px;
+}
+.req-dialog {
+  inline-size: min(520px, calc(100vw - 32px));
+  padding: 0;
+  border: 3px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 8px 8px 0 var(--ink);
+}
+.req-dialog::backdrop {
+  background: rgb(18 17 16 / 0.7);
+}
+.req-dialog form {
+  display: grid;
+  gap: 6px;
+  padding: clamp(20px, 4vw, 32px);
+}
+.req-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+.req-head h4 {
+  margin: 0;
+  font: 800 clamp(1.3rem, 3vw, 1.7rem) / 1.15 var(--font-display);
+  letter-spacing: -0.02em;
+}
+.req-head h4 span {
+  display: block;
+  color: var(--accent-ink);
+}
+.req-x {
+  flex: none;
+  inline-size: 44px;
+  block-size: 44px;
+  border: 2px solid var(--ink);
+  background: transparent;
+  color: inherit;
+  font: 700 1.6rem/1 var(--font-display);
+  cursor: pointer;
+}
+.req-x:hover {
+  background: var(--accent);
+}
+.req-sub {
+  margin-block: 4px 12px;
+  color: var(--ink-2);
+}
+.req-dialog label {
+  margin-block-start: 8px;
+  font: 700 0.85rem var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.req-dialog input,
+.req-dialog textarea {
+  inline-size: 100%;
+  min-block-size: 48px;
+  padding: 10px 12px;
+  border: 2px solid var(--ink);
+  border-radius: 0;
+  background: #fff;
+  color: var(--ink);
+  font: 400 1rem var(--font-display);
+}
+.req-dialog textarea {
+  resize: vertical;
+}
+.req-dialog input:focus-visible,
+.req-dialog textarea:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+.req-dialog .btn {
+  justify-self: start;
+  margin-block-start: 16px;
+  color: var(--ink);
+}
+.req-note {
+  margin-block-start: 8px;
+  font-size: 0.85rem;
+  color: var(--ink-2);
+}
