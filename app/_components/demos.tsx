@@ -7,6 +7,7 @@ export const DEMOS: Partial<Record<ProjectId, ComponentType>> = {
   redmars: dynamic(() => import("./demos/Shots").then((m) => ({ default: () => <m.default id="redmars" /> })), { ssr: false }),
   solar: dynamic(() => import("./demos/Solar"), { ssr: false }),
   attendance: dynamic(() => import("./demos/Attendance"), { ssr: false }),
+  farhat: dynamic(() => import("./demos/Shots").then((m) => ({ default: () => <m.default id="farhat" /> })), { ssr: false }),
   alraheel: dynamic(() => import("./demos/Shots").then((m) => ({ default: () => <m.default id="alraheel" /> })), { ssr: false }),
   trendora: dynamic(() => import("./demos/Trendora"), { ssr: false }),
   zombie: dynamic(() => import("./demos/Shots").then((m) => ({ default: () => <m.default id="zombie" /> })), { ssr: false }),

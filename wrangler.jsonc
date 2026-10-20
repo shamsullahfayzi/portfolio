@@ -1,10 +1,20 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "portfolio",
+  "main": "worker/index.js",
   "compatibility_date": "2026-10-12",
-  // The site is a static export (`next build` writes ./out), so Cloudflare only has to serve those files.
+  // The site is a static export (`next build` writes ./out). The Worker only handles /api/*; everything else is served from the files.
   "assets": {
     "directory": "./out",
-    "not_found_handling": "404-page"
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    "run_worker_first": ["/api/*"]
+  },
+  // Demo requests are mailed to me with Cloudflare Email Routing. Needs Email Routing enabled on the domain,
+  // and TO verified as a destination address there (the same inbox hello@ forwards to).
+  "send_email": [{ "name": "DEMO_MAIL", "destination_address": "shams.fayzi@gmail.com" }],
+  "vars": {
+    "FROM": "demo-requests@shamsullahfayzi.dev",
+    "TO": "shams.fayzi@gmail.com"
   }
 }

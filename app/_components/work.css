@@ -52,6 +52,16 @@
   --bg: var(--paper-2);
   --card: var(--paper);
 }
+:is(.proj, .room-card)[data-theme="farhat"] {
+  --bg: #0f2a44;
+  --fg: #f3eee4;
+  --mute: #c6d3de;
+  --hi: #f7931e;
+  --card: #f6fafb;
+  --card-fg: #121110;
+  --card-mute: #4a463f;
+  --line: #f3eee4;
+}
 :is(.proj, .room-card)[data-theme="trendora"] {
   --bg: #2b4fff;
   --fg: #f3eee4;
@@ -736,4 +746,18 @@
   margin-block-start: 8px;
   font-size: 0.85rem;
   color: var(--ink-2);
+}
+.req-trap {
+  position: absolute;
+  inset-inline-start: -9999px;
+  inline-size: 1px;
+  block-size: 1px;
+  opacity: 0;
+}
+.req-done {
+  padding: clamp(20px, 4vw, 32px);
+}
+.req-dialog .btn:disabled {
+  opacity: 0.6;
+  cursor: progress;
 }

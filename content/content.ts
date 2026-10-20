@@ -14,6 +14,7 @@ export type ProjectId =
   | "solar"
   | "attendance"
   | "alraheel"
+  | "farhat"
   | "trendora"
   | "zombie"
   | "jobcenter"
@@ -33,6 +34,7 @@ export const PROJECT_LINKS: Partial<Record<ProjectId, string>> = {
 
 // Live sites, shown beside the code link.
 export const LIVE_LINKS: Partial<Record<ProjectId, string>> = {
+  farhat: "https://www.farhat.af",
   zombie: "https://zombie-typing.netlify.app/",
 };
 
@@ -52,8 +54,8 @@ export const SKILL_USE: Record<string, SkillUse[]> = {
   SQL: [{ project: "redmars" }, { project: "alraheel" }, { project: "trendora" }, { project: "musicmingle" }],
 
   // Frontend
-  React: [{ project: "redmars" }, { project: "solar" }, { project: "trendora" }, { project: "zombie" }, { project: "jobcenter" }, { note: "This portfolio" }],
-  "Next.js": [{ project: "trendora" }, { note: "This portfolio" }],
+  React: [{ project: "farhat" }, { project: "redmars" }, { project: "solar" }, { project: "trendora" }, { project: "zombie" }, { project: "jobcenter" }, { note: "This portfolio" }],
+  "Next.js": [{ project: "farhat" }, { project: "trendora" }, { note: "This portfolio" }],
   Angular: [{ project: "zoya" }],
   Blazor: [{ project: "alraheel" }],
   Tailwind: [{ project: "zombie" }, { project: "jobcenter" }],
@@ -115,7 +117,7 @@ export const SKILL_USE: Record<string, SkillUse[]> = {
 };
 
 // Project ids that get a full-size feature treatment, in display order.
-export const FEATURED: ProjectId[] = ["redmars", "solar", "attendance", "alraheel", "trendora", "zombie", "jobcenter"];
+export const FEATURED: ProjectId[] = ["redmars", "solar", "attendance", "alraheel", "farhat", "trendora", "zombie", "jobcenter"];
 // Compact strip at the end.
 export const MINOR: ProjectId[] = ["prescription", "zoya", "musicmingle"];
 
@@ -155,7 +157,7 @@ type Copy = {
     noCode: string;
     request: {
       button: string; title: string; sub: string; name: string; email: string; message: string;
-      placeholder: string; send: string; close: string; note: string;
+      placeholder: string; send: string; sending: string; sent: string; sentText: string; fallback: string; close: string; note: string;
     };
     stack: string;
     more: string;
@@ -197,7 +199,7 @@ export const COPY: Copy = {
   },
   work: {
     title: "Selected work",
-    intro: "Seven projects, one habit: ship the whole thing, from the database to the screen.",
+    intro: "Ten projects, one habit: ship the whole thing, from the database to the screen.",
     code: "Read the code",
     live: "Live site",
     request: {
@@ -209,8 +211,12 @@ export const COPY: Copy = {
       message: "Message",
       placeholder: "What would you like to see, and when suits you?",
       send: "Send request",
+      sending: "Sending…",
+      sent: "Request sent",
+      sentText: "Thank you. I will reply to the email address you gave me.",
+      fallback: "Could not send it directly, so I opened your email app with the message ready instead.",
       close: "Close",
-      note: "This opens your email app with the message ready to send.",
+      note: "I only use these details to reply to you.",
     },
     noCode: "No public code",
     stack: "Built with",
@@ -274,6 +280,23 @@ export const COPY: Copy = {
         points: [
           "Azure AI Document Intelligence and Tesseract OCR extract the customer details.",
           "Layered architecture on PostgreSQL, with triggers and views for complex queries and role-based sign-in.",
+        ],
+        note: "Client work, no public code",
+      },
+      farhat: {
+        name: "Farhat Hospital",
+        kind: "Client project · hospital website",
+        pitch:
+          "The public website of a psychiatric, neurological and addiction treatment hospital in Kabul. A frightened family needs one thing from it: to find the phone number and feel safe calling.",
+        stats: [
+          { value: "3", label: "languages: Dari, Pashto, English" },
+          { value: "24h", label: "open, call or WhatsApp in one tap" },
+        ],
+        stack: ["Next.js", "React"],
+        points: [
+          "Right-to-left Dari and Pashto alongside English, switchable from any screen.",
+          "A daily-schedule timeline that highlights what is happening at the hospital right now.",
+          "Services, admission steps and the inpatient programme explained plainly, with call and WhatsApp always in reach.",
         ],
         note: "Client work, no public code",
       },

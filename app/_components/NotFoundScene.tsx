@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 const ROUTES = [
   { href: "/", label: "Home", note: "Start over" },
-  { href: "/#work", label: "Selected work", note: "Ten projects, most with a live demo" },
+  { href: "/#work", label: "Selected work", note: "Ten projects, most with a live demo or screenshots" },
   { href: "/#process", label: "How I work", note: "From first conversation to deployment" },
   { href: "/#contact", label: "Contact", note: "hello@shamsullahfayzi.dev" },
 ];

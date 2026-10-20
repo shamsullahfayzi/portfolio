@@ -46,6 +46,32 @@ const SHOTS: Partial<Record<ProjectId, { label: string; shots: Shot[] }>> = {
       },
     ],
   },
+  farhat: {
+    label: "farhat.af · the live site",
+    shots: [
+      {
+        src: "/shots/farhat-care.webp",
+        w: 980,
+        h: 630,
+        title: "Care",
+        alt: "Farhat Hospital website, services section: an accordion of psychiatry, addiction treatment, counselling and the women's ward, with a photo of a staff member leading a learning session.",
+      },
+      {
+        src: "/shots/farhat-day.webp",
+        w: 980,
+        h: 650,
+        title: "A day at Farhat",
+        alt: "Farhat Hospital website, daily schedule: morning, afternoon and evening tabs and a timeline from the Asr prayer to sleep, with the current activity marked Now.",
+      },
+      {
+        src: "/shots/farhat-admission.webp",
+        w: 980,
+        h: 460,
+        title: "Admission",
+        alt: "Farhat Hospital website, admission steps: call us, first assessment, admission, treatment and recovery.",
+      },
+    ],
+  },
   zombie: {
     label: "Zombie Typing · in play",
     shots: [
