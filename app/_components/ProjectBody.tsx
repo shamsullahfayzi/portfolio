@@ -75,9 +75,9 @@ export default function ProjectBody({
 
         <p className="proj-links" {...r}>
           {live && <ExternalLink href={live}>{t.live}</ExternalLink>}
-          {repo ? <ExternalLink href={repo}>{t.code}</ExternalLink> : !live && <span className="mono">{p.note ?? t.noCode}</span>}
+          {repo && <ExternalLink href={repo}>{t.code}</ExternalLink>}
           {DEMO_REQUEST.includes(id) && <RequestDemo project={p.name} />}
-          {!repo && p.note && (live || DEMO_REQUEST.includes(id)) && <span className="mono">{p.note}</span>}
+          {!repo && <span className="mono">{p.note ?? t.noCode}</span>}
         </p>
       </div>
 
